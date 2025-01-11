@@ -5,9 +5,32 @@ In order to create discord presences in cocos2d-x, you must first download disco
 
 Also, you must configure in discord developer portal an application so that the discord API can connect to the code, copy the client id and paste it where it says YOUR_CLIENT_ID, then you can put the name of your project and logo. In your scene, it does not matter which one you call DiscordPressence as it is in CustomScene so that it works, compile and in your discord activity it should appear.
 
-# NOTE
+[!TIP]
 For cocos2d-x 4.0 I recommend you to download discord game sdk 2.5.6 to avoid any error when compiling. 
 
+# Example 
+
+``` <cpp>
+bool CustomScene::init() {
+if (!Scene::init()) return false;
+
+cocos2d::Size vs = cocos2d::Director::getInstance()->getVisibleSize();
+cocos2d::Vec2 origin = cocos2d::Director::getInstance()->getVisibleOrigin();
+
+if (DiscordPressence::getInstance()->init()) {
+DiscordPressence::getInstance()->updatePressence("Loading...", "My game is starting!");
+}
+
+cocos2d::Sprite* mySpr = cocos2d::Sprite::create("mySpr.png");
+mySpr->setPosition(cocos2d::Vec2(vs.width / 2, vs.height / 2));
+addChild(mySpr);
+return true;
+}
+
+void CustomScene::update(float dt) {
+DiscordPressence::getInstance()->tick();
+}
+```
 
 # UPDATE
 
