@@ -15,9 +15,8 @@ CustomScene::~CustomScene()
 bool CustomScene::init() {
     if (!Scene::init()) return false;
 
-    auto dcPressence = DiscordPressence::getInstance();
-    if (dcPressence->init()) {
-     dcPressence->updatePressence("Add your state","Add your details");
+    if (DiscordPressence::getInstance()->init()) {
+     DiscordPressence::getInstance()->updatePressence("state", "details");
     }
 
     return true;
@@ -25,8 +24,5 @@ bool CustomScene::init() {
 }
 
 void CustomScene::update(float dt) {
- auto dcPressence = DiscordPressence::getInstance();
-   if (dcPressence->core) {
-    dcPressence->core->RunCallbacks();
-   }
+  DiscordPressence::getInstance()->tick();
 }
